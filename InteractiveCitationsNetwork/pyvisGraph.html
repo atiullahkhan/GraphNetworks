@@ -1,0 +1,80 @@
+<html>
+<head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis.css" type="text/css" />
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis-network.min.js"> </script>
+<center>
+<h1>Citations Network</h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+
+<style type="text/css">
+
+        #mynetwork {
+            width: 1300px;
+            height: 500px;
+            background-color: #222222;
+            border: 1px solid lightgray;
+            position: relative;
+            float: left;
+        }
+
+        
+
+        
+
+        
+</style>
+
+</head>
+
+<body>
+<div id = "mynetwork"></div>
+
+
+<script type="text/javascript">
+
+    // initialize global variables.
+    var edges;
+    var nodes;
+    var network; 
+    var container;
+    var options, data;
+
+    
+    // This method is responsible for drawing the graph, returns the drawn network
+    function drawGraph() {
+        var container = document.getElementById('mynetwork');
+        
+        
+
+        // parsing and collecting nodes and edges from the python
+        nodes = new vis.DataSet([{"Citation_Date": "1999-12-02", "Degree": 0.16666666666666666, "color": "orange", "font": {"color": "white"}, "id": 9912219, "label": 9912219, "shape": "dot", "size": 10, "value": 350}, {"Degree": 0.018518518518518517, "color": "red", "font": {"color": "white"}, "id": 9412130, "label": 9412130, "shape": "dot", "size": 10, "value": 150}, {"Degree": 0.037037037037037035, "color": "red", "font": {"color": "white"}, "id": 9501063, "label": 9501063, "shape": "dot", "size": 10, "value": 150}, {"Degree": 0.037037037037037035, "color": "red", "font": {"color": "white"}, "id": 9505130, "label": 9505130, "shape": "dot", "size": 10, "value": 150}, {"Degree": 0.037037037037037035, "color": "red", "font": {"color": "white"}, "id": 9511002, "label": 9511002, "shape": "dot", "size": 10, "value": 150}, {"Degree": 0.037037037037037035, "color": "red", "font": {"color": "white"}, "id": 9708095, "label": 9708095, "shape": "dot", "size": 10, "value": 150}, {"Degree": 0.037037037037037035, "color": "red", "font": {"color": "white"}, "id": 9710094, "label": 9710094, "shape": "dot", "size": 10, "value": 150}, {"Degree": 0.018518518518518517, "color": "red", "font": {"color": "white"}, "id": 9812251, "label": 9812251, "shape": "dot", "size": 10, "value": 150}, {"Degree": 0.037037037037037035, "color": "red", "font": {"color": "white"}, "id": 9907167, "label": 9907167, "shape": "dot", "size": 10, "value": 150}, {"Citation_Date": "1999-12-03", "Degree": 0.018518518518518517, "color": "red", "font": {"color": "white"}, "id": 9912228, "label": 9912228, "shape": "dot", "size": 10, "value": 150}, {"Degree": 0.018518518518518517, "color": "red", "font": {"color": "white"}, "id": 9911059, "label": 9911059, "shape": "dot", "size": 10, "value": 150}, {"Citation_Date": "1999-12-03", "Degree": 0.12962962962962962, "color": "orange", "font": {"color": "white"}, "id": 9912235, "label": 9912235, "shape": "dot", "size": 10, "value": 350}, {"Citation_Date": "1999-12-05", "Degree": 0.31481481481481477, "color": "green", "font": {"color": "white"}, "id": 9912240, "label": 9912240, "shape": "dot", "size": 10, "value": 600}, {"Degree": 0.018518518518518517, "color": "red", "font": {"color": "white"}, "id": 9405135, "label": 9405135, "shape": "dot", "size": 10, "value": 150}, {"Degree": 0.018518518518518517, "color": "red", "font": {"color": "white"}, "id": 9502097, "label": 9502097, "shape": "dot", "size": 10, "value": 150}, {"Degree": 0.018518518518518517, "color": "red", "font": {"color": "white"}, "id": 9508161, "label": 9508161, "shape": "dot", "size": 10, "value": 150}, {"Degree": 0.018518518518518517, "color": "red", "font": {"color": "white"}, "id": 9606105, "label": 9606105, "shape": "dot", "size": 10, "value": 150}, {"Degree": 0.018518518518518517, "color": "red", "font": {"color": "white"}, "id": 9608193, "label": 9608193, "shape": "dot", "size": 10, "value": 150}, {"Degree": 0.018518518518518517, "color": "red", "font": {"color": "white"}, "id": 9702053, "label": 9702053, "shape": "dot", "size": 10, "value": 150}, {"Degree": 0.018518518518518517, "color": "red", "font": {"color": "white"}, "id": 9705216, "label": 9705216, "shape": "dot", "size": 10, "value": 150}, {"Degree": 0.018518518518518517, "color": "red", "font": {"color": "white"}, "id": 9710093, "label": 9710093, "shape": "dot", "size": 10, "value": 150}, {"Degree": 0.018518518518518517, "color": "red", "font": {"color": "white"}, "id": 9803011, "label": 9803011, "shape": "dot", "size": 10, "value": 150}, {"Degree": 0.018518518518518517, "color": "red", "font": {"color": "white"}, "id": 9805022, "label": 9805022, "shape": "dot", "size": 10, "value": 150}, {"Degree": 0.018518518518518517, "color": "red", "font": {"color": "white"}, "id": 9903011, "label": 9903011, "shape": "dot", "size": 10, "value": 150}, {"Degree": 0.018518518518518517, "color": "red", "font": {"color": "white"}, "id": 9903055, "label": 9903055, "shape": "dot", "size": 10, "value": 150}, {"Degree": 0.018518518518518517, "color": "red", "font": {"color": "white"}, "id": 9910060, "label": 9910060, "shape": "dot", "size": 10, "value": 150}, {"Degree": 0.018518518518518517, "color": "red", "font": {"color": "white"}, "id": 9911118, "label": 9911118, "shape": "dot", "size": 10, "value": 150}, {"Degree": 0.018518518518518517, "color": "red", "font": {"color": "white"}, "id": 9912097, "label": 9912097, "shape": "dot", "size": 10, "value": 150}, {"Degree": 0.018518518518518517, "color": "red", "font": {"color": "white"}, "id": 9912114, "label": 9912114, "shape": "dot", "size": 10, "value": 150}, {"Degree": 0.018518518518518517, "color": "red", "font": {"color": "white"}, "id": 9912128, "label": 9912128, "shape": "dot", "size": 10, "value": 150}, {"Citation_Date": "1999-12-06", "Degree": 0.1111111111111111, "color": "orange", "font": {"color": "white"}, "id": 9912252, "label": 9912252, "shape": "dot", "size": 10, "value": 350}, {"Degree": 0.018518518518518517, "color": "red", "font": {"color": "white"}, "id": 9412229, "label": 9412229, "shape": "dot", "size": 10, "value": 150}, {"Degree": 0.018518518518518517, "color": "red", "font": {"color": "white"}, "id": 9502053, "label": 9502053, "shape": "dot", "size": 10, "value": 150}, {"Degree": 0.018518518518518517, "color": "red", "font": {"color": "white"}, "id": 9604044, "label": 9604044, "shape": "dot", "size": 10, "value": 150}, {"Degree": 0.018518518518518517, "color": "red", "font": {"color": "white"}, "id": 9805008, "label": 9805008, "shape": "dot", "size": 10, "value": 150}, {"Degree": 0.018518518518518517, "color": "red", "font": {"color": "white"}, "id": 9808153, "label": 9808153, "shape": "dot", "size": 10, "value": 150}, {"Degree": 0.018518518518518517, "color": "red", "font": {"color": "white"}, "id": 9908050, "label": 9908050, "shape": "dot", "size": 10, "value": 150}, {"Citation_Date": "1999-12-07", "Degree": 0.1111111111111111, "color": "orange", "font": {"color": "white"}, "id": 9912260, "label": 9912260, "shape": "dot", "size": 10, "value": 350}, {"Degree": 0.018518518518518517, "color": "red", "font": {"color": "white"}, "id": 9510017, "label": 9510017, "shape": "dot", "size": 10, "value": 150}, {"Degree": 0.018518518518518517, "color": "red", "font": {"color": "white"}, "id": 9610043, "label": 9610043, "shape": "dot", "size": 10, "value": 150}, {"Degree": 0.018518518518518517, "color": "red", "font": {"color": "white"}, "id": 9611050, "label": 9611050, "shape": "dot", "size": 10, "value": 150}, {"Degree": 0.018518518518518517, "color": "red", "font": {"color": "white"}, "id": 9704080, "label": 9704080, "shape": "dot", "size": 10, "value": 150}, {"Degree": 0.018518518518518517, "color": "red", "font": {"color": "white"}, "id": 9902024, "label": 9902024, "shape": "dot", "size": 10, "value": 150}, {"Degree": 0.018518518518518517, "color": "red", "font": {"color": "white"}, "id": 9908157, "label": 9908157, "shape": "dot", "size": 10, "value": 150}, {"Citation_Date": "1999-12-08", "Degree": 0.018518518518518517, "color": "red", "font": {"color": "white"}, "id": 9912270, "label": 9912270, "shape": "dot", "size": 10, "value": 150}, {"Degree": 0.018518518518518517, "color": "red", "font": {"color": "white"}, "id": 9306153, "label": 9306153, "shape": "dot", "size": 10, "value": 150}, {"Citation_Date": "1999-12-09", "Degree": 0.14814814814814814, "color": "orange", "font": {"color": "white"}, "id": 9912286, "label": 9912286, "shape": "dot", "size": 10, "value": 350}, {"Degree": 0.018518518518518517, "color": "red", "font": {"color": "white"}, "id": 9707163, "label": 9707163, "shape": "dot", "size": 10, "value": 150}, {"Degree": 0.018518518518518517, "color": "red", "font": {"color": "white"}, "id": 9802015, "label": 9802015, "shape": "dot", "size": 10, "value": 150}, {"Degree": 0.018518518518518517, "color": "red", "font": {"color": "white"}, "id": 9802074, "label": 9802074, "shape": "dot", "size": 10, "value": 150}, {"Degree": 0.018518518518518517, "color": "red", "font": {"color": "white"}, "id": 9805150, "label": 9805150, "shape": "dot", "size": 10, "value": 150}, {"Degree": 0.018518518518518517, "color": "red", "font": {"color": "white"}, "id": 9806074, "label": 9806074, "shape": "dot", "size": 10, "value": 150}, {"Degree": 0.018518518518518517, "color": "red", "font": {"color": "white"}, "id": 9808140, "label": 9808140, "shape": "dot", "size": 10, "value": 150}, {"Degree": 0.018518518518518517, "color": "red", "font": {"color": "white"}, "id": 9810068, "label": 9810068, "shape": "dot", "size": 10, "value": 150}, {"Degree": 0.018518518518518517, "color": "red", "font": {"color": "white"}, "id": 9901023, "label": 9901023, "shape": "dot", "size": 10, "value": 150}]);
+        edges = new vis.DataSet([{"arrows": "to", "color": "orange", "from": 9912219, "to": 9412130, "weight": 1, "width": 1.0}, {"arrows": "to", "color": "orange", "from": 9912219, "to": 9501063, "weight": 1, "width": 1.0}, {"arrows": "to", "color": "orange", "from": 9912219, "to": 9505130, "weight": 1, "width": 1.0}, {"arrows": "to", "color": "orange", "from": 9912219, "to": 9511002, "weight": 1, "width": 1.0}, {"arrows": "to", "color": "orange", "from": 9912219, "to": 9708095, "weight": 1, "width": 1.0}, {"arrows": "to", "color": "orange", "from": 9912219, "to": 9710094, "weight": 1, "width": 1.0}, {"arrows": "to", "color": "orange", "from": 9912219, "to": 9812251, "weight": 1, "width": 1.0}, {"arrows": "to", "color": "orange", "from": 9912219, "to": 9907167, "weight": 1, "width": 1.0}, {"arrows": "to", "color": "red", "from": 9912228, "to": 9911059, "weight": 1, "width": 0.5}, {"arrows": "to", "color": "orange", "from": 9912235, "to": 9501063, "weight": 1, "width": 1.0}, {"arrows": "to", "color": "orange", "from": 9912235, "to": 9505130, "weight": 1, "width": 1.0}, {"arrows": "to", "color": "orange", "from": 9912235, "to": 9511002, "weight": 1, "width": 1.0}, {"arrows": "to", "color": "orange", "from": 9912235, "to": 9708095, "weight": 1, "width": 1.0}, {"arrows": "to", "color": "orange", "from": 9912235, "to": 9710094, "weight": 1, "width": 1.0}, {"arrows": "to", "color": "orange", "from": 9912235, "to": 9907167, "weight": 1, "width": 1.0}, {"arrows": "to", "color": "orange", "from": 9912235, "to": 9912219, "weight": 1, "width": 1.0}, {"arrows": "to", "color": "green", "from": 9912240, "to": 9405135, "weight": 1, "width": 1.5}, {"arrows": "to", "color": "green", "from": 9912240, "to": 9502097, "weight": 1, "width": 1.5}, {"arrows": "to", "color": "green", "from": 9912240, "to": 9508161, "weight": 1, "width": 1.5}, {"arrows": "to", "color": "green", "from": 9912240, "to": 9606105, "weight": 1, "width": 1.5}, {"arrows": "to", "color": "green", "from": 9912240, "to": 9608193, "weight": 1, "width": 1.5}, {"arrows": "to", "color": "green", "from": 9912240, "to": 9702053, "weight": 1, "width": 1.5}, {"arrows": "to", "color": "green", "from": 9912240, "to": 9705216, "weight": 1, "width": 1.5}, {"arrows": "to", "color": "green", "from": 9912240, "to": 9710093, "weight": 1, "width": 1.5}, {"arrows": "to", "color": "green", "from": 9912240, "to": 9803011, "weight": 1, "width": 1.5}, {"arrows": "to", "color": "green", "from": 9912240, "to": 9805022, "weight": 1, "width": 1.5}, {"arrows": "to", "color": "green", "from": 9912240, "to": 9903011, "weight": 1, "width": 1.5}, {"arrows": "to", "color": "green", "from": 9912240, "to": 9903055, "weight": 1, "width": 1.5}, {"arrows": "to", "color": "green", "from": 9912240, "to": 9910060, "weight": 1, "width": 1.5}, {"arrows": "to", "color": "green", "from": 9912240, "to": 9911118, "weight": 1, "width": 1.5}, {"arrows": "to", "color": "green", "from": 9912240, "to": 9912097, "weight": 1, "width": 1.5}, {"arrows": "to", "color": "green", "from": 9912240, "to": 9912114, "weight": 1, "width": 1.5}, {"arrows": "to", "color": "green", "from": 9912240, "to": 9912128, "weight": 1, "width": 1.5}, {"arrows": "to", "color": "orange", "from": 9912252, "to": 9412229, "weight": 1, "width": 1.0}, {"arrows": "to", "color": "orange", "from": 9912252, "to": 9502053, "weight": 1, "width": 1.0}, {"arrows": "to", "color": "orange", "from": 9912252, "to": 9604044, "weight": 1, "width": 1.0}, {"arrows": "to", "color": "orange", "from": 9912252, "to": 9805008, "weight": 1, "width": 1.0}, {"arrows": "to", "color": "orange", "from": 9912252, "to": 9808153, "weight": 1, "width": 1.0}, {"arrows": "to", "color": "orange", "from": 9912252, "to": 9908050, "weight": 1, "width": 1.0}, {"arrows": "to", "color": "orange", "from": 9912260, "to": 9510017, "weight": 1, "width": 1.0}, {"arrows": "to", "color": "orange", "from": 9912260, "to": 9610043, "weight": 1, "width": 1.0}, {"arrows": "to", "color": "orange", "from": 9912260, "to": 9611050, "weight": 1, "width": 1.0}, {"arrows": "to", "color": "orange", "from": 9912260, "to": 9704080, "weight": 1, "width": 1.0}, {"arrows": "to", "color": "orange", "from": 9912260, "to": 9902024, "weight": 1, "width": 1.0}, {"arrows": "to", "color": "orange", "from": 9912260, "to": 9908157, "weight": 1, "width": 1.0}, {"arrows": "to", "color": "red", "from": 9912270, "to": 9306153, "weight": 1, "width": 0.5}, {"arrows": "to", "color": "orange", "from": 9912286, "to": 9707163, "weight": 1, "width": 1.0}, {"arrows": "to", "color": "orange", "from": 9912286, "to": 9802015, "weight": 1, "width": 1.0}, {"arrows": "to", "color": "orange", "from": 9912286, "to": 9802074, "weight": 1, "width": 1.0}, {"arrows": "to", "color": "orange", "from": 9912286, "to": 9805150, "weight": 1, "width": 1.0}, {"arrows": "to", "color": "orange", "from": 9912286, "to": 9806074, "weight": 1, "width": 1.0}, {"arrows": "to", "color": "orange", "from": 9912286, "to": 9808140, "weight": 1, "width": 1.0}, {"arrows": "to", "color": "orange", "from": 9912286, "to": 9810068, "weight": 1, "width": 1.0}, {"arrows": "to", "color": "orange", "from": 9912286, "to": 9901023, "weight": 1, "width": 1.0}]);
+
+        // adding nodes and edges to the graph
+        data = {nodes: nodes, edges: edges};
+
+        var options = {"edges": {"color": {"inherit": true}, "smooth": false}, "physics": {"minVelocity": 0.75}};
+        
+        
+
+        
+
+        network = new vis.Network(container, data, options);
+
+        
+
+
+        
+
+        return network;
+
+    }
+
+    drawGraph();
+
+</script>
+</body>
+</html>
